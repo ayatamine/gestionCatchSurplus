@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>پنل مدیریت | شروع سریع</title>
+  <title>@yield('title')</title>
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{asset('adminlte-rtl/plugins/font-awesome/css/font-awesome.min.css')}}">
@@ -23,6 +23,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- template rtl version -->
   <link rel="stylesheet" href="{{asset('adminlte-rtl/dist/css/custom-style.css')}}">
   <!-- added style by me -->
+  @yield('style')
   <style>
     .ayat-nav-sidebar{
         padding-right: 0;
@@ -72,5 +73,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{asset('adminlte-rtl/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('adminlte-rtl/dist/js/adminlte.min.js')}}"></script>
+
+@yield('js')
 </body>
 </html>

@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
 use App\Setting;
+use App\Benificier;
 class AdminController extends Controller
 {
-    
+
     public function index(){
-        $settings = DB::select('select * from settings where id = 1');
-        return view ('admin.home')->with('settings',$settings[0]);
+        $settings = Setting::find(1);
+        return view ('admin.home')->with('settings',$settings);
     }
     public function updateSiteSettings(Request $request){
           //dd($request);
@@ -37,5 +38,22 @@ class AdminController extends Controller
            $settings->save();
            Session::flash('success','تم تغيير الإعدادات بنجاح');
            return redirect()->back();
+    }
+    public function Beneficiaries(){
+        $settings = Setting::find(1);
+        $benificieries = Benificier::orderBy('created_at','desc')->get();
+        return view('admin.Beneficiaries',compact('settings','benificieries'));
+    }
+    public function createBenificier(Request $request){
+       
+        Benificier::create([
+           'name'=>$request->name,
+           'file_number'=>$request->file_number,
+           'id_number'=>$request->id_number,
+           'phone_number'=>$request->phone_number,
+           'note'=>($request->note ) ? ($request->note) : '',
+        ]);
+        Session::flash('success','تم التسجيل بنجاح');
+        return redirect()->back();
     }
 }

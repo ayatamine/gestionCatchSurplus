@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link text-center">
-      <img src="{{asset('adminlte-rtl/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class=" img-circle elevation-3"
+      <img src="{{asset('img/').'/'.$settings->logo}}" alt="AdminLTE Logo" class=" img-circle elevation-3"
            style="opacity: .8;    max-height: 50px;">
     </a>
 
@@ -25,13 +25,13 @@
                        with font-awesome or any other icon font library -->
                   
                   <li class="nav-item">
-                    <a href="{{route('admin.index')}}" class="nav-link ayat-nl active">
+                    <a href="{{route('admin.index')}}" class="nav-link ayat-nl @if(Request::segment(2) =='') active @endif">
                         <i class="nav-icon fa fa-dashboard"></i>
                       <p>إعدادات الموقع</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                      <a href="#" class="nav-link ayat-nl">
+                      <a href="{{route('admin.Beneficiaries')}}" class="nav-link ayat-nl @if(Request::segment(2) =='Beneficiaries') active @endif">
                         <i class="nav-icon fa fa-users"></i>
                         <p>إدارة المستفيدين</p>
                       </a>

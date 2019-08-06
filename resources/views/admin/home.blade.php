@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-
+@section('title','إعدادات الموقع')
 @section('content')
  <!-- Content Header (Page header) -->
  <div class="content-header">
@@ -13,8 +13,8 @@
                 <li class="breadcrumb-item"><a href="#">خانه</a></li>
                 <li class="breadcrumb-item active">الرئيسية</li>
               </ol>
-            </div --}}><!-- /.col -->
-          </div><!-- /.row -->
+            </div ><!-- /.col -->
+          </div><!-- /.row -->--}}
         </div><!-- /.container-fluid -->
       </div>
       <!-- /.content-header -->
@@ -81,4 +81,5 @@
             </div>
         <!-- /.row -->
       </div>
+ </div>
 @endsection

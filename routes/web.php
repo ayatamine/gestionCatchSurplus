@@ -17,6 +17,8 @@ Route::get('/', function () {
 Route::group(['prefix'=>'admin-cpx'],function(){
       Route::get('/','AdminController@index')->name('admin.index');
       Route::post('/updateSiteSettings','AdminController@updateSiteSettings')->name('updateSiteSettings');
+      Route::get('/Beneficiaries','AdminController@Beneficiaries')->name('admin.Beneficiaries');
+      Route::post('/addBenificier','AdminController@createBenificier')->name('admin.addBenificier');
 });
 Route::get('/benificier','HomeController@index')->name('front.benificier');
 Auth::routes();
