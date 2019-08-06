@@ -56,8 +56,8 @@
                                 <div class="card-header">
                                   <h3 class="card-title">
                                         <button type="button" class="btn btn-info float-right mr-1 ml-1" data-toggle="modal" data-target="#addb"><i class="fa fa-plus " style="position:relative;top:3px"></i> إضافة</button>
-                                        <button type="button" class="btn btn-info float- mr-1 ml-1"><i class="fa fa-file-excel-o"  style="position:relative;top:3px"></i> إستيراد xls</button>
-                                        <button type="button" class="btn btn-info float-right mr-1 ml-1"><i class="fa fa-file-excel-o"  style="position:relative;top:3px"></i> تصدير xls</button>
+                                        <a href="{{route('import_excel.excel')}}" type="button" class="btn btn-info float- mr-1 ml-1"><i class="fa fa-file-excel-o"  style="position:relative;top:3px"></i> إستيراد xls</a>
+                                        <a href="{{route('export_excel.excel')}}" type="button" class="btn btn-info float-right mr-1 ml-1"><i class="fa fa-file-excel-o"  style="position:relative;top:3px"></i> تصدير xls</a>
                                   </h3>
                                 </div>
                                 <!-- /.card-header -->

@@ -13,7 +13,7 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+  {{--   <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="جستجو" aria-label="Search">
         <div class="input-group-append">
@@ -22,18 +22,20 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> --}}
 
     <!-- Right navbar links -->
     <ul class="navbar-nav mr-auto">
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-                <span class="">Ayat amine</span>
-                <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                <span class="">{{Auth::user()->name}}</span>
+                <i class="fa fa-sort-desc" style="position:relative;top:-3px" aria-hidden="true"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
-          <a href="#" class="dropdown-item">
+          <a href="{{ url('/logout') }}"  onclick="event.preventDefault();
+          document.getElementById('logout-form').submit();"
+           class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
               <div class="media-body">
@@ -43,6 +45,9 @@
                         <i class="fa fa-sign-out" aria-hidden="true"></i>
                   </span>
                 </h3>
+                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                  {{ csrf_field() }}
+              </form>
               </div>
             </div>
             <!-- Message End -->

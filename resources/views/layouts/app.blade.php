@@ -8,68 +8,89 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Styles 
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{{asset('adminlte-rtl/plugins/font-awesome/css/font-awesome.min.css')}}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{asset('adminlte-rtl/dist/css/adminlte.min.css')}}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <!-- bootstrap rtl -->
+    <link rel="stylesheet" href="{{asset('adminlte-rtl/dist/css/bootstrap-rtl.min.css')}}">
+    <!-- template rtl version -->
+    <link rel="stylesheet" href="{{asset('adminlte-rtl/dist/css/custom-style.css')}}">
+    <!-- added style by me -->
+    <style>
+     #app{
+       background: #eeedef;    padding-bottom: 65px;
+     }
+     .cb{background:#fff}
+    </style>
+    @yield('style')
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
+            @guest
+            <nav class="main-header mr-0 navbar navbar-expand bg-white navbar-light border-bottom">
+                    <!-- Left navbar links -->
+                    <ul class="navbar-nav">
+                      
+                      <li class="nav-item d-none d-sm-inline-block">
+                        <a href="{{route('login')}}" class="nav-link">تسجيل الدخول</a>
+                      </li>
+                      <li class="nav-item d-none d-sm-inline-block">
+                        <a href="{{route('register')}}" class="nav-link">تسجيل</a>
+                      </li>
                     </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
+                
+                    <!-- SEARCH FORM -->
+                    
+                
+                    <!-- Right navbar links -->
+                    <ul class="navbar-nav mr-auto">
+                      
+                      
+                      
+                      
+                      <li class="nav-item">
+                        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"></a>
+                      </li>
+                    </ul>
+            </nav>
+            @else
+            <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+                    <!-- Left navbar links -->
+                    <ul class="navbar-nav">
+                      
+                            <li class="nav-item d-none d-sm-inline-block">
+                                    <a href="{{ url('/logout') }}"  onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();"
+                                     class="nav-link"> تسجيل الخروج</a>
                             </li>
-                        @endguest
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                     </ul>
-                </div>
-            </div>
-        </nav>
+                
+                    <!-- SEARCH FORM -->
+                    
+                
+                    <!-- Right navbar links -->
+                    <ul class="navbar-nav mr-auto">
+                      
+                      
+                      
+                      
+                      <li class="nav-item">
+                        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"></a>
+                      </li>
+                    </ul>
+            </nav>
+            @endguest
 
         @yield('content')
     </div>
