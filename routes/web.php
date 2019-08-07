@@ -19,6 +19,7 @@ Route::group(['prefix'=>'admin-cpx','middleware'=>['auth','admin']],function(){
       Route::post('/updateSiteSettings','AdminController@updateSiteSettings')->name('updateSiteSettings');
       Route::get('/Beneficiaries','AdminController@Beneficiaries')->name('admin.Beneficiaries');
       Route::post('/addBenificier','AdminController@createBenificier')->name('admin.addBenificier');
+      Route::get('/delete_benificier/{id}','AdminController@delete_benificier')->name('admin.delete_benificier');
       Route::get('/export_excel','AdminController@exportexcel')->name('export_excel.excel');
       Route::post('/import_excel','AdminController@importexcel')->name('import_excel.excel');
       Route::get('/Supervisor','AdminController@Supervisorpage')->name('admin.Supervisor');
@@ -29,6 +30,8 @@ Route::group(['prefix'=>'admin-cpx','middleware'=>['auth','admin']],function(){
       Route::get('login', '\App\Http\Controllers\Auth\LoginController@showLoginForm');
       Route::post('register_supervison', 'AdminController@register_supervison')->name('register_supervison');
       Route::get('/make_admin/{id}', 'AdminController@make_admin')->name('make_admin');
+      Route::get('/make_non_admin/{id}', 'AdminController@make_non_admin')->name('make_non_admin');  
+      Route::get('/delete_supervisor/{id}', 'AdminController@delete_supervisor')->name('delete_supervisor');
 
 });
 Route::get('/benificiers','HomeController@index')->name('front.benificier');

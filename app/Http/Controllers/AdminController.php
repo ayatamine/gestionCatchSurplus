@@ -60,6 +60,12 @@ class AdminController extends Controller
         Session::flash('success','تم التسجيل بنجاح');
         return redirect()->back();
     }
+    public function delete_benificier($id){
+        $ben =Benificier::findorfail($id);
+        $ben->delete();
+        Session::flash('success','تم الحدف ');
+        return redirect()->back();
+    }
     public function exportexcel(){
         $benificieries = Benificier::orderBy('id','asc')->get();
         /*
@@ -118,5 +124,18 @@ class AdminController extends Controller
        $user->save();
        Session::flash('success','تم تعيينه كمشرف');
        return redirect()->back();
+    }
+    public function make_non_admin($id){
+       $user = User::findorfail($id);
+       $user->admin = false;
+       $user->save();
+       Session::flash('success','تم إزالة التعيين كمشرف');
+       return redirect()->back();
+    }
+    public function delete_supervisor($id){
+        $user = User::findorfail($id);
+        $user->delete();
+        Session::flash('success','تم حدف المشرف');
+        return redirect()->back();
     }
 }

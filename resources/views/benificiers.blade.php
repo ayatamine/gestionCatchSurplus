@@ -48,11 +48,28 @@
         font-weight: 500;
         margin-bottom: 0;
     }
+    .top-right.text-right a{
+        color: #989090;
+        padding: 5px;
+    }
     </style>
 </head>
 <body >
     <div class="container">
-           
+        <div class="top-right  text-right">
+            @auth
+                @if(Auth::user()->admin)
+                <a href="{{ url('/admin-cpx') }}">لوحة التحكم</a>  
+                <a href="{{ url('/logout') }}">تسجيل الخروج</a>
+                @endif
+            @else
+                <a href="{{ route('login') }}"> تسجيل الدخول</a>
+                <!--
+                <a href="{{ route('front.benificier') }}">صفحة الاستعلام </a>
+                -->
+               
+            @endauth
+        </div>
                   <div class="card-body text-center">
                     <img src="{{asset('img/'.$settings->logo)}}" id="site_logo" alt="site_logo" srcset="">
                   </div>

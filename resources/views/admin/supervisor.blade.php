@@ -56,6 +56,7 @@
             @endif
             
         </div>
+        
         <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">جدول بقائمة المشرفين</h3>
@@ -79,6 +80,7 @@
                                       <th>الاسم</th>
                                       <th>البريد الإلكتروني</th>
                                       <th>تعيين كمشرف</th>
+                                      <th> حدف</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -91,13 +93,20 @@
                                       </td>
                                        <td>
                                          @if($user->admin)
-                                            مشرف
+                                         <a href="{{route('make_non_admin',['id'=>$user->id])}}" type="button" class="btn btn-info btn-sm float-right mr-1 ml-1" >
+                                          <i class="fa fa-minus " style="position:relative;top:3px"></i>
+                                            إلغاء التعيين </a>
                                           @else
                                           <a href="{{route('make_admin',['id'=>$user->id])}}" type="button" class="btn btn-info btn-sm float-right mr-1 ml-1" >
                                           <i class="fa fa-plus " style="position:relative;top:3px"></i>
                                            تعيين</a>
                                           @endif
 
+                                       </td>
+                                       <td>
+                                        <a href="{{route('delete_supervisor',['id'=>$user->id])}}" type="button" class="btn btn-danger btn-sm float-right mr-1 ml-1" >
+                                          <i class="fa fa-trash " style="position:relative;top:3px"></i>
+                                           حدف</a>
                                        </td>
                                     </tr>
                                      @endforeach

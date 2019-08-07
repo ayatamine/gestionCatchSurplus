@@ -66,20 +66,25 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/admin-cpx') }}">لوحة التحكم</a>
-                        <a href="{{ url('/logout') }}">تسجيل الخروج</a>
-                    @else
-                        <a href="{{ route('login') }}"> تسجيل الدخول</a>
-                        <a href="{{ route('register') }}">تسجيل </a>
-                    @endauth
-                </div>
-            @endif
+          
 
             <div class="content">
-              
+                @if (Route::has('login'))
+                <div class="top-right links text-right">
+                    @auth
+                            @if(Auth::user()->admin)
+                            <a href="{{ url('/admin-cpx') }}">لوحة التحكم</a>  
+                            <a href="{{ url('/logout') }}">تسجيل الخروج</a>
+                            @endif
+                        <a href="{{ route('front.benificier') }}">صفحة الاستعلام</a>
+                    @else
+                        <a href="{{ route('login') }}"> تسجيل الدخول</a>
+                        
+                        <a href="{{ route('front.benificier') }}">صفحة الاستعلام </a>
+                       
+                    @endauth
+                </div>
+            @endif 
             </div>
         </div>
     </body>

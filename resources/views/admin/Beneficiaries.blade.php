@@ -58,6 +58,7 @@
                                         <button type="button" class="btn btn-info float-right mr-1 ml-1" data-toggle="modal" data-target="#addb"><i class="fa fa-plus " style="position:relative;top:3px"></i> إضافة</button>
                                         <button type="button" class="btn btn-info float- mr-1 ml-1" data-toggle="modal" data-target="#importxlxs"><i class="fa fa-file-excel-o"  style="position:relative;top:3px"></i> إستيراد xls</button>
                                         <a href="{{route('export_excel.excel')}}" type="button" class="btn btn-info float-right mr-1 ml-1" ><i class="fa fa-file-excel-o"  style="position:relative;top:3px"></i> تصدير xls</a>
+                                        <a href="{{route('front.benificier')}}" target="_blink" type="button" class="btn btn-success float-left mr-1 ml-1" ><i class="fa fa-paper-plane-o"  style="position:relative;top:3px"></i> صفحة الإستعلام</a>
                                         
                                   </h3>
                                 </div>
@@ -71,6 +72,7 @@
                                       <th> رقم الهوية</th>
                                       <th>رقم الجوال</th>
                                       <th>ملاحظات</th>
+                                      <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -84,7 +86,13 @@
                                       <td>{{$benificier->id_number}}</td>
                                       <td> {{$benificier->phone_number}}</td>
                                        <td>{{$benificier->note}}</td>
+                                       <td>
+                                        <a href="{{route('admin.delete_benificier',['id'=>$benificier->id])}}" type="button" class="btn btn-danger btn-sm float-right mr-1 ml-1" >
+                                          <i class="fa fa-trash " style="position:relative;top:3px"></i>
+                                           حدف</a>
+                                       </td>
                                     </tr>
+                                    
                                      @endforeach
                                     @endif
                                    
