@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+        @font-face {font-family: 'segoeui';
+            src: url("segoeui.ttf");
+            src: url("segoeui.ttf") format("embedded-opentype"),
+            url("segoeui.ttf") format("truetype"); 
+            font-weight: normal;
+            font-style: normal;
+        }
+        .container{padding-top: 50px}
+        .fheader{color: #ff4600;margin-bottom:0.9rem}
+        .progress{    height: 0.5rem;margin-bottom:1.6rem }
+        .spac{    height: 1.9rem;
+          background-color: #daedf4;
+          border-color: #a1ddf3;
+        }
+        form{
+            padding:30px 0;
+        }
+        .searchbtn{
+            background: #59bddf!important;
+            border: 0;
+            border-radius: 20px;
+            padding: 4px 20px;
+        }
+        .form-control{    border-radius: 20px;
+    background: #eeeeee;}
+    .form-control:focus{
+        box-shadow: none;
+    }
+    label{text-align:right;font-family:segoeui;    color: #656565; }
+    </style>
+</head>
+<body >
+    <div class="container">
+              <h4 class="text-right fheader" >الإستعلام عن بيانات المستفيد</h4>
+              <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <button type="button" class="btn  btn-lg btn-block spac"></button>
+              
+              <form action="" method="POST" role="form">
+                        <div class="row">
+                                <div class="form-group col-md-6 row">
+                          
+                                        <label for="staticname" class="col-sm-5 col-form-label">اسم صاحب السجل المدني</label>
+                                        <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="staticname" placeholder="">
+                                        </div>
+                                </div>
+                                <div class="form-group col-md-6 row">
+                                        <label for="inputnum" class="col-sm-5 col-form-label">السجل المدني</label>
+                                        <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="inputnum" placeholder="">
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="row">
+                                <div class="form-group col-md-6 row">
+                          
+                                        <label for="staticregistername" class="col-sm-5 col-form-label">رقم التسجيل في جمعية البر</label>
+                                        <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="staticregistername" placeholder="">
+                                        </div>
+                                </div>
+                                <div class="form-group col-md-6 row">
+                                        <label for="inputbenificied" class="col-sm-5 col-form-label">هل هو مستفيد من جمعية البر؟</label>
+                                        <div class="col-sm-7">
+                                          <input type="text" class="form-control" id="inputbenificied" placeholder="">
+                                        </div>
+                                </div>
+                        </div>
+                        <hr>
+                        <button type="submit" class="btn btn-info searchbtn">بحث</button>
+                       
+              </form>
+              
+    </div>
+  
+</body>
+</html>

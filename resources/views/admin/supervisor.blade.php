@@ -44,21 +44,31 @@
                   </button>
               </div>
             @endif
+            @if($errors)
+              @foreach($errors as $err)
+              <div class="alert alert-success alert-dismissible fade show  mr-auto ml-auto mb-3" role="alert">
+                  {{$err}}   
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              @endforeach
+            @endif
             
         </div>
         <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">جدول بقائمة المستفيدين</h3>
+                  <h3 class="card-title">جدول بقائمة المشرفين</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                         <div class="card">
                                 <div class="card-header">
                                   <h3 class="card-title">
-                                        <button type="button" class="btn btn-info float-right mr-1 ml-1" data-toggle="modal" data-target="#addb"><i class="fa fa-plus " style="position:relative;top:3px"></i> إضافة</button>
-                                        <button type="button" class="btn btn-info float- mr-1 ml-1" data-toggle="modal" data-target="#importxlxs"><i class="fa fa-file-excel-o"  style="position:relative;top:3px"></i> إستيراد xls</button>
-                                        <a href="{{route('export_excel.excel')}}" type="button" class="btn btn-info float-right mr-1 ml-1" ><i class="fa fa-file-excel-o"  style="position:relative;top:3px"></i> تصدير xls</a>
-                                        
+                                      <button type="button" class="btn btn-info btn-sm float-right mr-1 ml-1" 
+                                      data-toggle="modal" data-target="#addb">
+                                      <i class="fa fa-plus " style="position:relative;top:3px"></i>
+                                       إضافة</button>
                                   </h3>
                                 </div>
                                 <!-- /.card-header -->
@@ -66,24 +76,29 @@
                                   <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                      <th>اسم المستفيد</th>
-                                      <th>رقم الملف</th>
-                                      <th> رقم الهوية</th>
-                                      <th>رقم الجوال</th>
-                                      <th>ملاحظات</th>
+                                      <th>الاسم</th>
+                                      <th>البريد الإلكتروني</th>
+                                      <th>تعيين كمشرف</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @if(count($benificieries) > 0)
-                                    @foreach($benificieries as $benificier)
+                                    @if(count($users) > 0)
+                                    @foreach($users as $user)
                                     <tr>
-                                      <td>{{$benificier->name}}</td>
+                                      <td>{{$user->name}}</td>
                                       <td>
-                                          {{$benificier->file_number}}
+                                          {{$user->email}}
                                       </td>
-                                      <td>{{$benificier->id_number}}</td>
-                                      <td> {{$benificier->phone_number}}</td>
-                                       <td>{{$benificier->note}}</td>
+                                       <td>
+                                         @if($user->admin)
+                                            مشرف
+                                          @else
+                                          <a href="{{route('make_admin',['id'=>$user->id])}}" type="button" class="btn btn-info btn-sm float-right mr-1 ml-1" >
+                                          <i class="fa fa-plus " style="position:relative;top:3px"></i>
+                                           تعيين</a>
+                                          @endif
+
+                                       </td>
                                     </tr>
                                      @endforeach
                                     @endif
@@ -108,39 +123,74 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                                <form role="form" id="addbf"  method="POST" action="{{route('admin.addBenificier')}}" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                    <div class="card-body pb-0">
-                                        <div class="form-group">
-                                        <label for="name">اسم المستفيد</label>
-                                        <input type="text"  name="name"  class="form-control" id="name" >
-                                        </div>
-                                        <div class="form-group">
-                                        <label for="file_number">رقم الملف</label>
-                                        <input type="text"  name="file_number"  class="form-control" id="file_number">
-                                        </div>
-                                        <div class="form-group">
-                                        <label for="id_number">رقم الهوية</label>
-                                        <input type="text" name="id_number"  class="form-control" id="id_number">
-                                        </div>
-                                        <div class="form-group">
-                                        <label for="phone_number">رقم الجوال</label>
-                                        <input type="number" name="phone_number" minlength="10" maxlength="12"  class="form-control" id="phone_number" placeholder="xxxxxxxxxx">
-                                        </div>
-                                        <div class="form-group">
-                                        <label for="note">ملاحظات</label>
-                                          <textarea name="note" class="w-100" id="note" rows="5"></textarea>
-                                          
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <!-- /.card-body -->
+                                <form class="form-horizontal" method="POST" action="{{ route('register_supervison') }}">
+                                        {{ csrf_field() }}
                 
-                                <div class="card-footer pt-0">
-                                    <button type="submit" class="btn btn-primary mr-3">إضافة</button>
-                                </div>
-                                </form>
+                                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                            <label for="name" class=" control-label">الاسم</label>
+                                            <div class="">
+                                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                
+                                                @if ($errors->has('name'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('name') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            
+                
+                                        </div>
+                
+                                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                            <label for="email" class=" control-label">البريد الإلكتروني</label>
+                
+                                            <div class="">
+                                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                
+                                                @if ($errors->has('email'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('email') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                
+                                        </div>
+                
+                                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                            <label for="password" class=" control-label">كلمة السر</label>
+                
+                                            <div class="">
+                                                <input id="password" type="password" class="form-control" name="password" required>
+                
+                                                @if ($errors->has('password'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('password') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                
+                                        </div>
+                
+                                        <div class="form-group">
+                                            <label for="password-confirm" class=" control-label">إعادة كلمة السر</label>
+                
+                                            <div class="">
+                                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                            </div>
+                
+                                        </div>
+                
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-md-offset-4">
+                                                <button type="submit" class="btn btn-primary">
+                                                    تسجيل
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>       
+                                                        
+                                                
+                                     
                         </div>
                         <div class="modal-footer">
                           
@@ -163,10 +213,14 @@
                                   <div class="card-body pb-0">
                                       <input type="file" name="file" class="form-control">
                                       <br>
-                                      <button class="btn btn-success">استيراد</button>
+                                      <button class="btn btn-success">Import User Data</button>
                                   </div>
                               </div>
-                             
+                              <!-- /.card-body -->
+              
+                              <div class="card-footer pt-0">
+                                  <button type="submit" class="btn btn-primary mr-3">إضافة</button>
+                              </div>
                               </form>
                       </div>
                       <div class="modal-footer">

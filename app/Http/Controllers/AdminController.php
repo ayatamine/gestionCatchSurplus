@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Excel;
 use Session;
+use App\User;
 use App\Setting;
 use App\Benificier;
 use App\ImportBenificier;
@@ -86,9 +87,36 @@ class AdminController extends Controller
         return (new Benificier)->download('Benificier.xlsx');
     }
     public function importexcel(){
-        (new ImportBenificier)->import(public_path('imported_files\ben.xlsx'), 'local', \Maatwebsite\Excel\Excel::XLSX);
+        //(new ImportBenificier)->import(public_path('imported_files\ben.xlsx'), 'local', \Maatwebsite\Excel\Excel::XLSX);
+        Excel::import(new ImportBenificier,request()->file('file'));
+        return redirect()->back();
     }
     public function registerpage(){
         return view('admin.register');
+    }
+    public function Supervisorpage(){
+        $users = User::where('id','!=',1)->orderby('created_at','desc')->get();
+        $settings = Setting::find(1);
+        return view('admin.supervisor',compact('users','settings'));
+    }
+    public function register_supervison(Request $request){
+        $this->validate($request,[
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+         User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+        return redirect()->back();
+    }
+    public function make_admin($id){
+       $user = User::findorfail($id);
+       $user->admin = true;
+       $user->save();
+       Session::flash('success','تم تعيينه كمشرف');
+       return redirect()->back();
     }
 }

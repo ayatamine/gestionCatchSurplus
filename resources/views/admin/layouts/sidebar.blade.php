@@ -36,6 +36,14 @@
                         <p>إدارة المستفيدين</p>
                       </a>
                   </li>
+                  @if(Auth::user()->id == 1)
+                  <li class="nav-item">
+                      <a href="{{route('admin.Supervisor')}}" class="nav-link ayat-nl @if(Request::segment(2) =='Supervisor') active @endif">
+                          <i class="fa fa-server" aria-hidden="true"></i>
+                        <p>إدارة المشرفين</p>
+                      </a>
+                  </li>
+                  @endif
                   
                 </ul>
               </nav>
