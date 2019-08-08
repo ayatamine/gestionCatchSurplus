@@ -101,9 +101,17 @@ class AdminController extends Controller
         return view('admin.register');
     }
     public function Supervisorpage(){
-        $users = User::where('id','!=',1)->orderby('created_at','desc')->get();
+        $users = User::orderby('created_at','desc')->get();
         $settings = Setting::find(1);
         return view('admin.supervisor',compact('users','settings'));
+    }
+    public function update_admin(Request $request){
+        $user = User::find(1);
+        $user->name = ($request->name) != "" ? ($request->name) : $user->name;
+        $user->email = $request->email;
+        $user->password =  ($request->password) != "" ? ($request->password) : $user->password;;
+        $user->save();
+        return redirect()->back();
     }
     public function register_supervison(Request $request){
         $this->validate($request,[

@@ -31,6 +31,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     .ayat-nav-sidebar .nav-item{
         border-bottom: 1px solid #4b545c;
     }
+    #example1_wrapper > div:nth-child(2) > div{
+      overflow-x:scroll; 
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -47,6 +50,83 @@ scratch. This page gets rid of all links and provides the needed markup only.
    
     @yield('content')
     <!-- /.content -->
+       {{-- model add benificier --}}
+       <div class="modal fade" id="update_admin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content mt-4">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <form class="form-horizontal" method="POST" action="{{ route('admin.update_admin') }}">
+                            {{ csrf_field() }}
+
+                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                <label for="name" class=" control-label">الاسم</label>
+                                <div class="">
+                                    <input id="name" type="text" class="form-control" name="name" value="{{Auth::user()->name}}" required autofocus>
+
+                                    @if ($errors->has('name'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                
+
+                            </div>
+
+                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <label for="email" class=" control-label">البريد الإلكتروني</label>
+
+                                <div class="">
+                                    <input id="email" type="email" class="form-control" name="email" value="{{Auth::user()->email}}" required>
+
+                                    @if ($errors->has('email'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                            </div>
+
+                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                <label for="password" class=" control-label">كلمة السر</label>
+
+                                <div class="">
+                                    <input id="password" type="password" class="form-control" name="password" >
+
+                                    @if ($errors->has('password'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        تحديث
+                                    </button>
+                                </div>
+                            </div>
+                        </form>       
+                                            
+                                    
+                        
+            </div>
+            <div class="modal-footer">
+              
+            </div>
+      </div>
+      </div>
+</div>
   </div>
   <!-- /.content-wrapper -->
 

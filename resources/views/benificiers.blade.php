@@ -149,12 +149,12 @@
             }
             });
            $.ajax({
-             url:'/search_benificier',
+             url:'{{route("front.search_benificier")}}',
              type: 'GET',
              data: $(form).serialize(),
              dataType : "json",
              success:function(data){
-                 console.log(data.ben);
+                 //console.log(data.ben);
                  if(data.res == "yes"){
                      $("#staticname").val(data.ben.name);
                      $("#id_number").val(data.ben.id_number);

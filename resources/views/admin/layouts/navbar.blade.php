@@ -51,8 +51,25 @@
               </div>
             </div>
             <!-- Message End -->
-          </a>
-          
+           </a>
+           @if(Auth::id() == 1)
+           <button data-target="#update_admin" data-toggle="modal" 
+            class="dropdown-item">
+             <!-- Message Start -->
+             <div class="media">
+               <div class="media-body">
+                 <h3 class="dropdown-item-title">
+                   تعديل بياناتي
+                   <span class="float-left text-sm text-danger">
+                         <i class="fa fa-cog" aria-hidden="true"></i>
+                   </span>
+                 </h3>
+                 
+               </div>
+             </div>
+             <!-- Message End -->
+           </button>
+           @endif
         </div>
       </li>
      {{--  <!-- Notifications Dropdown Menu -->
@@ -88,3 +105,5 @@
       </li> --}}
     </ul>
   </nav>
+  
+</div>

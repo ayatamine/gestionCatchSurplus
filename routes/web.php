@@ -32,6 +32,7 @@ Route::group(['prefix'=>'admin-cpx','middleware'=>['auth','admin']],function(){
       Route::get('/make_admin/{id}', 'AdminController@make_admin')->name('make_admin');
       Route::get('/make_non_admin/{id}', 'AdminController@make_non_admin')->name('make_non_admin');  
       Route::get('/delete_supervisor/{id}', 'AdminController@delete_supervisor')->name('delete_supervisor');
+      Route::post('/update_admin', 'AdminController@update_admin')->name('admin.update_admin');
 
 });
 Route::get('/benificiers','HomeController@index')->name('front.benificier');
