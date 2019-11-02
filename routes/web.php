@@ -11,33 +11,15 @@
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
-});
-Route::group(['prefix'=>'admin-cpx','middleware'=>['auth','admin']],function(){
-      Route::get('/','AdminController@index')->name('admin.index');
-      Route::post('/updateSiteSettings','AdminController@updateSiteSettings')->name('updateSiteSettings');
-      Route::get('/Beneficiaries','AdminController@Beneficiaries')->name('admin.Beneficiaries');
-      Route::post('/addBenificier','AdminController@createBenificier')->name('admin.addBenificier');
-      Route::get('/delete_benificier/{id}','AdminController@delete_benificier')->name('admin.delete_benificier');
-      Route::get('/export_excel','AdminController@exportexcel')->name('export_excel.excel');
-      Route::post('/import_excel','AdminController@importexcel')->name('import_excel.excel');
-      Route::get('/Supervisor','AdminController@Supervisorpage')->name('admin.Supervisor');
+}); */
+Route::get('/','HomeController@index')->name('index');
+Route::post('/add_catch','HomeController@add_catch')->name('add_catch');
+Route::get('/editCach/{id}','HomeController@editCach')->name('editCach');
+Route::post('/update_catch/{catch_id}','HomeController@update_catch')->name('update_catch');
+Route::get('/clientlist','HomeController@clientlist')->name('clientlist');
+Route::get('/deleteclient','HomeController@deleteclient')->name('deleteclient');
+Route::get('/payrest','HomeController@payrest')->name('payrest');
 
-      // the login and register of admin
-      //Route::get('/register','App\Http\Controllers\Auth\RegisterController@register');
-      Route::get('register', '\App\Http\Controllers\Auth\RegisterController@showRegistrationForm');
-      Route::get('login', '\App\Http\Controllers\Auth\LoginController@showLoginForm');
-      Route::post('register_supervison', 'AdminController@register_supervison')->name('register_supervison');
-      Route::get('/make_admin/{id}', 'AdminController@make_admin')->name('make_admin');
-      Route::get('/make_non_admin/{id}', 'AdminController@make_non_admin')->name('make_non_admin');  
-      Route::get('/delete_supervisor/{id}', 'AdminController@delete_supervisor')->name('delete_supervisor');
-      Route::post('/update_admin', 'AdminController@update_admin')->name('admin.update_admin');
-
-});
-Route::get('/benificiers','HomeController@index')->name('front.benificier');
-Route::get('/search_benificier','HomeController@search_benificier')->name('front.search_benificier');
 Auth::routes();
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
-Route::get('/home', 'AdminController@index')->name('home');
